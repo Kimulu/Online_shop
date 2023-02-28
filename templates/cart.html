@@ -1,0 +1,142 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+  <div class="row">
+    <div class="col-lg-8" id="summary2">
+      <h1 >Cart</h1>
+      {% if cart_items %}
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Cart Item</th>
+              <th>Name</th>
+              <th>Price</th>
+              <th>Quantity</th>
+              
+            </tr>
+          </thead>
+          <tbody>
+            {% for item in cart_items %}
+              <tr>
+                <td><img src="{{item.item.img_url}}" class="cart_image"/></td>
+                <td>{{ item.item.name }}</td>
+                <td>{{ item.item.price }}</td>
+                <td>{{ item.quantity }}</td>
+                <td>
+                  <form action="{{ url_for('remove_from_cart') }}" method="post">
+                      <input type="hidden" name="item_id" value="{{ item.item.id }}">
+                      <button type="submit" class="btn btn-danger btn-sm">Remove from Cart</button>
+                  </form>
+              </td>
+              </tr>
+            {% endfor %}
+            
+          </tbody>
+        </table>
+        <div class="back">
+          <a href="{{ url_for('index') }}" style="text-decoration: none;"><p><----- Back to Shopping</p></a>
+        </div>
+       
+       
+    
+      {% else %}
+        <p>Your cart is empty.</p>
+        <div class="back2">
+          <a href="{{ url_for('index') }}" style="text-decoration: none;"><p><----- Back to Shopping</p></a>
+        </div>
+      {% endif %}
+    </div>
+    <div class="col-lg-4" id="summary">
+      <div>
+        <h4 style="padding-top:4%;padding-bottom:10%;">Summary</h4>
+        <hr>
+        
+        <h4 style="padding-top:10%;padding-bottom: 10%;">TOTAL PRICE: {{ total }}</h4>
+      </div>
+      <!-- Replace "test" with your own sandbox Business account app client ID -->
+   <script src="https://www.paypal.com/sdk/js?client-id=ATUyoIRvJIZ9jDhaEswH-1z4o2KXHZk0-mc1Ale3LZ-FMEEtGm4eHi7KwRy8r3S49CeIuJ-LXEMtFIBQ&disable-funding=credit,card"></script>
+   <!-- Set up a container element for the button -->
+   <div id="paypal-button-container"></div>
+   
+    </div>
+
+  </div>
+
+</div>
+
+
+
+
+  
+
+   
+<!--<script>
+  // Render the PayPal button
+  paypal.Buttons({
+    // Set the amount to be charged
+    createOrder: function(data, actions) {
+      return actions.order.create({
+        purchase_units: [{
+          amount: {
+            value: "{{ total|tojson }}"
+          }
+        }]
+      });
+    },
+    // Redirect to success page after successful payment
+    onApprove: function(data, actions) {
+      return actions.order.capture().then(function(details) {
+        window.location.href = "/success";
+      });
+    }
+  }).render('#paypal-button-container');
+</script> -->
+<script>
+paypal.Buttons({
+  style: {
+    layout: 'vertical',
+    color:  'blue',
+    shape:  'pill',
+    height:36,
+    label:  'pay'
+  },
+  createOrder: function(data, actions) {
+    // Set up the transaction details
+    var total = "{{total|tojson}}"
+    var orderData = {
+      amount: {
+        currency_code: 'USD',
+        value: total
+      }
+    };
+
+    // Call the createOrder API to set up the transaction
+    return actions.order.create({
+      purchase_units: [orderData]
+    });
+  },
+
+  onApprove: function(data, actions) {
+    // Call your Flask route to save the order to the database
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', '/save-order');
+    xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+    xhr.onload = function() {
+      if (xhr.status === 200) {
+        // Show the success page with the cart items
+        // insert code to display cart items in success page
+        
+      } else {
+        console.log('Failed to save order: ' + xhr.responseText);
+      }
+    };
+    xhr.send(JSON.stringify(data));
+    window.location.href = "/success";
+  }
+}).render('#paypal-button-container');
+
+</script>
+
+{% endblock %}
+

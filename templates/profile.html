@@ -1,0 +1,50 @@
+
+<!---<body>
+    <h1>Welcome, {{ user.username }}!</h1>
+    <h2>Orders:</h2>
+    {% for order in orders %}
+        <h3>Name: {{ order.name }}</h3>
+        <h3>Odds: {{ order.odds }}</h3>
+        <p>Betslip :{{ order.detailed_description }}</p>
+      
+
+    {% endfor %}
+
+    
+</body> -->
+
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="row">
+    <div class="col-md-3 border-right" id="profile">
+        <h1>Profile</h1>
+        <hr>
+      <img src="{{ current_user.email|gravatar }}" class="rounded-circle img-thumbnail" alt="User Profile Picture">
+      <h3>Name: {{ current_user.username }}</h3>
+      <h4>Email: {{ current_user.email }}</h4>
+    </div>
+    <div class="col-md-9" id="betslip">
+      {% if orders %}
+        
+        
+            <h2>Purchases</h2>
+            <hr>
+            {% for order in orders %}
+            <h6>Name : {{ order.name }}</h6>
+            <h4>Odds : {{ order.odds }}</h3>
+             <h4>Betslip : {{ order.detailed_description }}</h4>
+            <hr>
+
+            {% endfor %}
+      {% else %}
+      <div class="orders">
+        <h2>Orders:</h2>
+        <p>No orders found.</p>
+      </div>
+       
+      {% endif %}
+    </div>
+  </div>
+{% endblock %}
+

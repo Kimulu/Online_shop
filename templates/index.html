@@ -1,0 +1,139 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  
+  <div class="jumbotron">
+    <h1 class="display-4">Welcome to BetWisePro</h1>
+    <p class="lead">Get the best betting tips and predictions for all your favorite sports.</p>
+    <hr class="my-4">
+    <p>Join our community of successful bettors and start winning today!</p>
+    <a class="btn btn-success btn-lg" href="{{url_for('register')}}" role="button">Get Started</a>
+  </div>
+
+  <section>
+    <div class="card">
+      <nav class="navbar navbar-expand-lg navbar-light bg-dark">
+        <a class="navbar-brand" href="#"><img class="logo"src="{{ url_for('static', filename='images/betslip_logo.PNG') }}"></a>
+       
+       
+      </nav>
+      <section class="featured-slip">
+        <div class="container">
+          <div class="row">
+            {% for item in items %}
+            <div class="col-lg-2 col-sm-4">
+              <div class="card mb-3">
+                <img src="{{item.img_url}}" class="card-img-top" alt="Football">
+                <div class="card-body">
+                  <h6>Odds: {{item.odds}} </h6>
+                  <h6>Price: {{item.price}}$</h6>
+                 
+                  <form method="POST" action="{{ url_for('add_to_cart') }}">
+                    <input type="hidden" name="item_id" value="{{item.id}}">
+                    <input type="hidden" name="quantity" value="1">
+                    <button type="submit" class="btn btn-secondary btn-sm">Add to Cart</button>
+                </form>
+                </div>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+    
+        </div>
+      </section>
+    </div>
+    
+  </section>
+
+  <section class="icon_description" id="Testimonial">
+    <div class="card bg-light">
+      <div class="card-body">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title"><i class="fa-solid fa-pen-to-square fa-2xl"></i></h5>
+                  <h4 class="card-text">Well Analysed Predictions</h4>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title"><i class="fa-solid fa-cart-shopping fa-2xl"></i></h5>
+                  <h4 class="card-text">Fast Checkouts</h4>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title"><i class="fa-solid fa-hand-holding-dollar fa-2xl"></i></h5>
+                  <h4 class="card-text">Best Prices</h4>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+  </section>
+  
+
+  <section class="bg-light py-5" id="Testimonial">
+    <div class="container Testimonial">
+      <div class="row">
+        <div class="col-lg-8 mx-auto">
+          <div class="card border-0 shadow">
+            <div class="card-body p-5">
+              <h2 class="font-weight-bold mb-4">What Our Customers Say</h2>
+              <div id="testimonialCarousel" class="carousel slide" data-ride="carousel">
+                <ol class="carousel-indicators">
+                  <li data-target="#testimonialCarousel" data-slide-to="0" class="active"></li>
+                  <li data-target="#testimonialCarousel" data-slide-to="1"></li>
+                  <li data-target="#testimonialCarousel" data-slide-to="2"></li>
+                </ol>
+                <div class="carousel-inner">
+                  <div class="carousel-item active">
+                    <div class="media">
+                      <img src="https://via.placeholder.com/64x64" class="rounded-circle mr-3" alt="Testimonial Image">
+                      <div class="media-body">
+                        <p class="font-weight-bold mb-0">John Doe</p>
+                        <p class="text-muted">Customer</p>
+                        <p>"I've been using BetWisePro for a few months now and I'm very impressed with the accuracy of their predictions. I've made a lot of profit thanks to them!"</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="carousel-item">
+                    <div class="media">
+                      <img src="https://via.placeholder.com/64x64" class="rounded-circle mr-3" alt="Testimonial Image">
+                      <div class="media-body">
+                        <p class="font-weight-bold mb-0">Jane Doe</p>
+                        <p class="text-muted">Customer</p>
+                        <p>"I was skeptical at first, but after using BetWisePro for a week I knew they were the real deal. Their predictions are always on point."</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="carousel-item">
+                    <div class="media">
+                      <img src="https://via.placeholder.com/64x64" class="rounded-circle mr-3" alt="Testimonial Image">
+                      <div class="media-body">
+                        <p class="font-weight-bold mb-0">Bob Smith</p>
+                        <p class="text-muted">Customer</p>
+                        <p>"I've tried a lot of prediction services in the past, but BetWisePro is by far the best. Their customer service is also top-notch."</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+
+{% endblock %}

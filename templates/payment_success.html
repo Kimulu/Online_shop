@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="container my-5" id="success">
+    <div >
+      <h4 class="alert-heading">Payment Successful!</h4>
+      <p>Your payment has been received.</p>
+      <hr>
+      <p class="mb-0">Thank you for your purchase!</p>
+      <div>
+        <h1>To view your purchases, go to your Profile</h1>
+        <button ><a href="{{ url_for('profile') }}" style="text-decoration: none;">OR CLICK HERE</a></button>
+      </div>
+    
+    </div>
+    
+  </div>
+{% endblock %}
