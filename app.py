@@ -93,7 +93,10 @@ class CartItem(db.Model):
     item_id = db.Column(db.Integer, db.ForeignKey('items.id'), nullable=False)
     quantity = db.Column(db.Integer, default=1, nullable=False)
 
-
+@app.route('/')
+def index():
+    items = Item.query.all()
+    return render_template('index.html', items=items)
 
 def admin_required(f):
     @wraps(f)
@@ -124,11 +127,6 @@ def create_admin():
     db.session.commit()
 
     return redirect(url_for('admin'))
-
-@app.route('/')
-def index():
-    items = Item.query.all()
-    return render_template('index.html', items=items)
 
 @app.route('/login', methods=["GET", "POST"])
 def login():
