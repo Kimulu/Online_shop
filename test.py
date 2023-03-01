@@ -1,5 +1,5 @@
 import json
-from app import db, Item
+from main import db, Item
 
 order_items_json = '[{"id": null, "item_id": 1, "quantity": 2}]'
 order_items = json.loads(order_items_json)
