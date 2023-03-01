@@ -16,7 +16,6 @@ from flask.json import JSONEncoder
 import json
 import hashlib
 from flask_gravatar import Gravatar
-import os
 
 
 
@@ -329,5 +328,4 @@ def profile():
     return render_template('profile.html',orders = order_list, user=user)
 
 if __name__ == '__main__':
-    port = int(os.environ.get('PORT', 5000))  # get the port number from environment variables
-    app.run(host='0.0.0.0', port=port)
+    app.run(debug=True)
