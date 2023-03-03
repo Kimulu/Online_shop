@@ -9,7 +9,8 @@
     </div>
   {% endif %}
 {% endwith %}
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="navbarbig_screen">
       <div class="container">
         <a class="navbar-brand" href="{{ url_for('index') }}"><img class="logo"src="{{ url_for('static', filename='images/logo.PNG') }}"></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -54,5 +55,43 @@
         </div>
       </div>
     </nav>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="navbarsmall_screen">
+      <div class="navbar-brand" id="navbar-brand" style="text-align:center;">
+        <a href="{{ url_for('index') }}" ><img src="{{ url_for('static', filename='images/logo.PNG') }}"></a>
+  
+      </div>
+    </nav>
+    
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="navbarsmall_screen">
+      <div id="second_nav">
+        <ul>
+          <li class="list_item">
+            <a  href="{{ url_for('index') }}"  style="color:white;"><i class="fa-solid fa-house fa-3x"></i></a>
+          </li>
+          <li class="list_item">
+            <a  href="{{ url_for('cart') }}" id="cart-icon" role="button"  aria-expanded="false" style="color:white;">
+              <i class="fas fa-shopping-cart fa-3x"></i>
+              <span class="badge bg-danger" id="cart-count" style="font-size: large;">0</span>
+            </a>
+          </li>
+          {% if  not current_user.is_authenticated: %}
+          <li class="list_item">
+            <a  href="{{ url_for('login') }}" style="color:white;"><i class="fa-solid fa-right-from-bracket fa-3x"></i></a>
+          </li>
+          {% else %}
+          <li class="list_item">
+            <a  href="{{ url_for('logout') }}" style="color:white;"><i class="fa-solid fa-right-from-bracket fa-3x"></i></a>
+          </li>
+          {% endif %}
+         
+          
+        </ul>
+
+      </div>
+    </nav>
+ 
+    
    
   </header>

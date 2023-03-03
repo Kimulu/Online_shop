@@ -5,9 +5,35 @@ button a{
     height:20%;
     width:60%;
 }
-.navbar {
-    background-color: black;
-  }
+.logo_phone{
+    width:40%;
+}
+
+@media only screen and (max-width: 600px) {
+    #navbarbig_screen{
+      display:none;
+    }
+}
+@media only screen and (min-width: 600px) {
+    #navbarsmall_screen{
+      display:none;
+    }
+}
+
+.mobile-nav{
+   
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #fff;
+        padding: 10px;
+}
+#navbar-brand{
+    margin:auto;
+}
+.navbar-brand{
+    margin-right: 0px;
+}
 .jumbotron{
     background-image: url('../images/woman_image.jpg');
     background-size: cover;
@@ -65,4 +91,12 @@ button a{
 }
 #success{
     padding:10% 4%;
+}
+.list_item{
+    display:inline;
+    color:#ffffff;
+    margin-right: 20px;
+}
+#second_nav{
+    margin:auto;
 }
